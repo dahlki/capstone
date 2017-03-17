@@ -17780,6 +17780,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(135);
 
+var _reactParallax = __webpack_require__(618);
+
 var _Header = __webpack_require__(267);
 
 var _Header2 = _interopRequireDefault(_Header);
@@ -17790,7 +17792,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+// import Header from '../components/Header.js'
+// import Landing from './Landing.jsx'
+//
+// class Layout extends Component {
+//
+//   constructor(props) {
+//     super(props);
+//   }
+//
+//   render () {
+//     return (
+//       <div>
+//         <Header />
+//         <div className="container mainContainer">
+//           <div className="row" id="mainRow">
+//             <Landing />
+//           </div>
+//         </div>
+//         { /* Footer? */}
+//       </div>
+//     );
+//   }
+// }
+//
+// /*
+//   map functions if needed, remove at end if not used
+//   const mapProps = state => ({})
+//   const mapDispatch = {}
+// */
+//
+// export default connect()(Layout);
+
+
+// import Parallax1 from '../components/Parallax1.jsx';
+// import Parallax2 from './ParallaxPart2';
+// import Parallax3 from './ParallaxPart3';
+// import NonParallax1 from './NonParallax1';
+// import NonParallax2 from './NonParallax2';
 
 var Layout = function (_Component) {
   _inherits(Layout, _Component);
@@ -17798,20 +17839,57 @@ var Layout = function (_Component) {
   function Layout(props) {
     _classCallCheck(this, Layout);
 
-    return _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, props));
+
+    _this.state = {
+      isHide: true
+    };
+    _this.hideBar = _this.hideBar.bind(_this);
+    return _this;
   }
 
   _createClass(Layout, [{
+    key: 'hideBar',
+    value: function hideBar() {
+      var isHide = this.state.isHide;
+
+
+      window.scrollY > 650 ? !isHide && this.setState({ isHide: true }) : isHide && this.setState({ isHide: false }); //eslint-disable-line
+      //  this.prev = window.scrollY
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.hideBar();
+      window.addEventListener('scroll', this.hideBar);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      window.removeEventListener('scroll', this.hideBar);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var hide = this.state.isHide;
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(_Header2.default, { classHide: hide }),
         _react2.default.createElement(
-          'div',
-          { className: 'container mainContainer' },
-          _react2.default.createElement('div', { className: 'row', id: 'mainRow' })
+          _reactParallax.Parallax,
+          { background1: './Record-Player-Wallpaper.jpg', strength: 400 },
+          _react2.default.createElement('br', null)
+        ),
+        _react2.default.createElement(
+          _reactParallax.Parallax,
+          { background2: './Record-Player-Wallpaper.jpg', strength: 400 },
+          _react2.default.createElement('br', null)
+        ),
+        _react2.default.createElement(
+          _reactParallax.Parallax,
+          { background3: './Record-Player-Wallpaper.jpg', strength: 400 },
+          _react2.default.createElement('br', null)
         )
       );
     }
@@ -17819,12 +17897,6 @@ var Layout = function (_Component) {
 
   return Layout;
 }(_react.Component);
-
-/*
-  map functions if needed, remove at end if not used
-  const mapProps = state => ({})
-  const mapDispatch = {}
-*/
 
 exports.default = (0, _reactRedux.connect)()(Layout);
 
@@ -42902,6 +42974,13 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement(_reactRouter.Route, { path: '/', component: _layout2.default })
   )
 ), document.getElementById('root'));
+
+/***/ }),
+/* 617 */,
+/* 618 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t(__webpack_require__(8),__webpack_require__(248)):"function"==typeof define&&define.amd?define(["react","react-dom"],t):"object"==typeof exports?exports["react-parallax"]=t(require("react"),require("react-dom")):e["react-parallax"]=t(e.React,e.ReactDOM)}(this,function(e,t){return function(e){function t(i){if(n[i])return n[i].exports;var o=n[i]={exports:{},id:i,loaded:!1};return e[i].call(o.exports,o,o.exports,t),o.loaded=!0,o.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.Background=t.Parallax=void 0;var o=n(4),r=i(o),s=n(3),a=i(s);t.Parallax=r.default,t.Background=a.default},function(t,n){t.exports=e},function(e,t){"use strict";function n(e,t){if(!t)return!1;var n=e.getBoundingClientRect().top,i=e.getBoundingClientRect().bottom;return n<=0&&i>=0||n>=0&&i<=window.innerHeight||n<=window.innerHeight&&i>=window.innerHeight}function i(e){if(!e)return 0;var t=window,n=document,i=n.documentElement,o=n.getElementsByTagName("body")[0];return t.innerHeight||i.clientHeight||o.clientHeight}function o(){return!("undefined"==typeof window||!window.document||!window.document.createElement)}function r(e,t){if(!t)return 0;var n=e,i=(e.getBoundingClientRect().height,Math.round(n.getBoundingClientRect().top));return i=i>window.innerHeight?window.innerHeight:i,s(0,window.innerHeight,i)}function s(e,t,n){var i=t-e,o=n-e;return o/i}function a(e,t,n,i){if(i)switch(console.log("hello"),t.property){case"blur":e.style.filter="blur("+n+(t.unit||"px")+")"}}Object.defineProperty(t,"__esModule",{value:!0}),t.isScrolledIntoView=n,t.getWindowHeight=i,t.canUseDOM=o,t.getRelativePosition=r,t.getPercentage=s,t.setStyleProp=a},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function r(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function s(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,"__esModule",{value:!0});var a=function(){function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(t,n,i){return n&&e(t.prototype,n),i&&e(t,i),t}}(),l=n(1),u=i(l),c=function(e){function t(){return o(this,t),r(this,(t.__proto__||Object.getPrototypeOf(t)).apply(this,arguments))}return s(t,e),a(t,[{key:"isParallaxBackground",value:function(){return!0}},{key:"render",value:function(){return u.default.createElement("div",{className:"react-parallax-background "+this.props.className},this.props.children)}}]),t}(u.default.Component);c.propTypes={children:u.default.PropTypes.node,className:u.default.PropTypes.string},c.defaultProps={className:""},t.default=c},function(e,t,n){"use strict";function i(e){return e&&e.__esModule?e:{default:e}}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function r(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function s(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,"__esModule",{value:!0});var a=function(){function e(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(t,n,i){return n&&e(t.prototype,n),i&&e(t,i),t}}(),l=n(1),u=i(l),c=n(5),d=i(c),h=n(2),p=function(e){function t(e){o(this,t);var n=r(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.state={childStyle:{position:"relative"}},n.canUseDOM=(0,h.canUseDOM)(),n.ReactDOM=d.default.findDOMNode?d.default:u.default,n.node=null,n.content=null,n.splitChildren=n.getSplitChildren(e),n.windowHeight=(0,h.getWindowHeight)(n.canUseDOM),n.timestamp=Date.now(),n.dynamicBlur=!(!e.blur||void 0===e.blur.min||void 0===e.blur.max),n.autobind(),n}return s(t,e),a(t,[{key:"componentWillReceiveProps",value:function(e){this.splitChildren=this.getSplitChildren(e)}},{key:"autobind",value:function(){this.onScroll=this.onScroll.bind(this),this.onWindowResize=this.onWindowResize.bind(this),this.updatePosition=this.updatePosition.bind(this),this.onWindowLoad=this.onWindowLoad.bind(this)}},{key:"render",value:function(){var e=this;return u.default.createElement("div",{className:"react-parallax "+(this.props.className?this.props.className:"")},this.props.bgImage?u.default.createElement("img",{className:"react-parallax-bgimage",src:this.props.bgImage,ref:"bgImage",alt:""}):null,this.splitChildren.bgChildren.length>0?u.default.createElement("div",{className:"react-parallax-background-children",ref:function(t){return e.bgMounted(t)}},this.splitChildren.bgChildren):null,u.default.createElement("div",{className:"react-parallax-content",style:this.state.childStyle,ref:"content"},this.splitChildren.children))}},{key:"componentWillUnmount",value:function(){this.canUseDOM&&(document.removeEventListener("scroll",this.onScroll,!1),window.removeEventListener("resize",this.onWindowResize,!1),window.removeEventListener("load",this.onWindowLoad,!1))}},{key:"componentDidMount",value:function(){var e=this;if(this.canUseDOM&&(document.addEventListener("scroll",this.onScroll,!1),window.addEventListener("resize",this.onWindowResize,!1),window.addEventListener("load",this.onWindowLoad,!1)),this.node=this.ReactDOM.findDOMNode(this),this.img=this.refs.bgImage?this.ReactDOM.findDOMNode(this.refs.bgImage):null,this.props.bgImage){var t=new Image;t.onload=t.onerror=function(t){e.updatePosition()},t.src=this.props.bgImage}else this.updatePosition();this.setParallaxStyle(),this.setInitialBackgroundStyles(this.img),this.setInitialBackgroundStyles(this.bg)}},{key:"bgMounted",value:function(e){this.bg=this.ReactDOM.findDOMNode(e)}},{key:"onScroll",value:function(e){if(this.canUseDOM){var t=Date.now();t-this.timestamp>=10&&(window.requestAnimationFrame(this.updatePosition),this.timestamp=t)}}},{key:"onWindowLoad",value:function(){this.updatePosition()}},{key:"getSplitChildren",value:function(e){var t=[],n=u.default.Children.toArray(e.children);return n.forEach(function(e,i){e.type&&e.type.prototype&&e.type.prototype.isParallaxBackground&&(t=t.concat(n.splice(i,1)))}),{bgChildren:t,children:n}}},{key:"updatePosition",value:function(){var e=!1;this.content=this.ReactDOM.findDOMNode(this.refs.content),this.contentHeight=this.content.getBoundingClientRect().height,this.contentWidth=this.node.getBoundingClientRect().width,this.img&&this.img.naturalWidth/this.img.naturalHeight<this.contentWidth/this.getImageHeight()&&(e=!0);var t=(0,h.getRelativePosition)(this.node,this.canUseDOM);this.img&&this.setImagePosition(t,e),this.bg&&this.splitChildren.bgChildren.length>0&&this.setBackgroundPosition(t)}},{key:"getImageHeight",value:function(){var e=this.props.strength<0;return Math.floor(this.contentHeight+(e?2.5:1)*Math.abs(this.props.strength))}},{key:"setImagePosition",value:function(e){var t=arguments.length>1&&void 0!==arguments[1]&&arguments[1],n=this.props.bgHeight||(t?"auto":this.getImageHeight()+"px"),i=this.props.bgWidth||(t?this.contentWidth+"px":"auto");if(this.img.style.height=n,this.img.style.width=i,this.props.disabled!==!0){var o=this.props.strength<0,r=(o?this.props.strength:0)-this.props.strength*e;if(this.img.style.WebkitTransform="translate3d(-50%, "+r+"px, 0)",this.img.style.transform="translate3d(-50%, "+r+"px, 0)",this.props.blur){var s=this.dynamicBlur?this.props.blur.min+(1-e)*this.props.blur.max:this.props.blur;this.setBlur(this.img,s)}}}},{key:"setBlur",value:function(e,t){e.style.WebkitFilter="blur("+t+"px)",e.style.filter="blur("+t+"px)"}},{key:"setBackgroundPosition",value:function(e){if(this.props.disabled!==!0){var t=this.props.strength<0,n=(t?this.props.strength:0)-this.props.strength*e;this.bg.style.WebkitTransform="translate3d(-50%, "+n+"px, 0)",this.bg.style.transform="translate3d(-50%, "+n+"px, 0)"}}},{key:"setInitialBackgroundStyles",value:function(e){var t=this;e&&(e.style.position="absolute",e.style.left="50%",e.style.WebkitTransform="translate3d(-50%, 0, 0)",e.style.transform="translate3d(-50%, 0, 0)",e.style.WebkitTransformStyle="preserve-3d",e.style.WebkitBackfaceVisibility="hidden",e.style.MozBackfaceVisibility="hidden",e.style.MsBackfaceVisibility="hidden",this.props.bgStyle&&Object.keys(this.props.bgStyle).forEach(function(n){e.style[n]=t.props.bgStyle[n]}))}},{key:"onWindowResize",value:function(){this.windowHeight=(0,h.getWindowHeight)(this.canUseDOM),this.updatePosition()}},{key:"setParallaxStyle",value:function(){this.node&&(this.node.style.position="relative",this.node.style.overflow="hidden")}},{key:"log",value:function(){if(this.props.log){var e;(e=console).log.apply(e,arguments)}}}]),t}(u.default.Component);p.propTypes={bgImage:u.default.PropTypes.string,bgStyle:u.default.PropTypes.object,bgWidth:u.default.PropTypes.string,bgHeight:u.default.PropTypes.string,strength:u.default.PropTypes.number,blur:u.default.PropTypes.oneOfType([u.default.PropTypes.number,u.default.PropTypes.object]),className:u.default.PropTypes.string},p.defaultProps={strength:100,log:!1,disabled:!1},t.default=p},function(e,n){e.exports=t}])});
 
 /***/ })
 /******/ ]);
