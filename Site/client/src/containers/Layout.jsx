@@ -38,11 +38,7 @@ import { connect } from 'react-redux';
 import { Parallax } from 'react-parallax';
 
 import Header from '../components/Header.js';
-// import Parallax1 from '../components/Parallax1.jsx';
-// import Parallax2 from './ParallaxPart2';
-// import Parallax3 from './ParallaxPart3';
-// import NonParallax1 from './NonParallax1';
-// import NonParallax2 from './NonParallax2';
+import Landing1 from '../components/Landing1.jsx';
 
 class Layout extends Component {
   constructor(props){
@@ -57,7 +53,6 @@ class Layout extends Component {
      let {isHide} = this.state;
 
      window.scrollY > 650 ? !isHide && this.setState({isHide: true}) : isHide && this.setState({isHide: false}) //eslint-disable-line
-    //  this.prev = window.scrollY
   }
 
   componentDidMount(){
@@ -70,24 +65,23 @@ class Layout extends Component {
   }
 
   render(){
-    let hide = this.state.isHide;
+    let classHide = this.state.isHide;
     return (
       <div>
-        <Header classHide={ hide } />
-        <Parallax background1="./Record-Player-Wallpaper.jpg" strength={400}>
-          <br />
+        <Header classHide={ classHide } />
+        <div>
+          <Parallax bgImage="./public/Record-Player-Wallpaper.jpg" strength={400}>
+            <br />
+            <Landing1 />
+            <br />
+            </Parallax>
+            <Parallax bgImage="./public/Record-Player-Wallpaper.jpg" strength={400}>
+            <br />
+            <Landing1 />
+            <br />
+          </Parallax>
+        </div>
 
-        </Parallax>
-
-        <Parallax background2="./Record-Player-Wallpaper.jpg" strength={400}>
-          <br />
-
-        </Parallax>
-
-        <Parallax background3="./Record-Player-Wallpaper.jpg" strength={400}>
-          <br />
-
-        </Parallax>
       </div>
     );
   }
