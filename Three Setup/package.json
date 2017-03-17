@@ -1,0 +1,21 @@
+{
+  "name": "Three",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js --watch server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "nodemon": "^1.11.0",
+    "ramda": "^0.23.0",
+    "three": "^0.84.0",
+    "three-first-person-controls": "^0.2.1"
+  }
+}
